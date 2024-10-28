@@ -8,46 +8,7 @@
 #define DATASET_SIZE 14
 
 //helper functions
-
-std::vector<std::string> split(std::string s, std::string delimiter) {
-    
-    size_t pos_start = 0, pos_end, delim_len = delimiter.length();
-    
-    std::string token;
-    
-    std::vector<std::string> res;
-
-    while ((pos_end = s.find(delimiter, pos_start)) != std::string::npos) {
-        
-        token = s.substr (pos_start, pos_end - pos_start);
-        
-        pos_start = pos_end + delim_len;
-        
-        res.push_back (token);
-        
-    }
-
-    res.push_back (s.substr (pos_start));
-    return res;
-}
-
-std::string** stringToDataset(std::string inputStr, std::string delimiter, int datasetSize) {
-
-  std::string tuple = inputStr.substr(0, inputStr.find(delimiter));
-
-  std::vector<std::string> splitVec = split(tuple, ",");
-  
-  std::string** outputDataset = new std::string[DATASET_SIZE][TUPEL_LEN];
-
-  for(int i = 0; i<TUPEL_LEN; i++ ) {
-
-    outputDataset[1][i] = splitVec[i];
-
-  }
-  
-  return outputDataset;
-  
-}
+std::vector<std::string> globalDataset;
 
 char* splitByIndex(char* inputString, int index) {
 
@@ -101,14 +62,10 @@ int main() {
   std::cout << inStr;
 
   drawBar();
-  
-  std::string** dataset = stringToDataset(input, delimiter, DATASET_SIZE);
 
-  drawBar();
-
-  std::cout << tuple;
+  std::cout << inStr;
   
-  std::string* hypo = newHypothesis(TUEL_LEN);
+  std::string* hypo = newHypothesis(TUPEL_LEN);
 
   for(int i = 0; i<TUPEL_LEN; i++) {
     std::cout <<  hypo[1] << ",\n";
