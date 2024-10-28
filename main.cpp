@@ -24,8 +24,24 @@ char* splitByIndex(char* inputString, int index) {
     
 }
 
-void drawBar() {std::cout << "------"; return;
+int findFirstOccurenceOfChar(char* inputArray, char toCheck, int length) {
+
+  for(int i = 0; i<length; i++) {
+
+    if(inputArray[i] == toCheck) { return i; }
+    if(i == length - 1 )         { return i; } 
+    
+  }
+
+  return 0;
+  
 }
+
+
+void drawBar() {std::cout << "------\n"; return;
+}
+
+
 std::string* newHypothesis(int length) {
 
   std::string* hypo = new std::string[length]
@@ -58,12 +74,12 @@ int main() {
 
   std::string input = readFileToString("PlayTennis.csv");
   char* inStr = input.data();
-
-  std::cout << inStr;
-
+  int inputDataLength = input.size();
+  
+  std::cout << inStr << "\n";
+  std::cout << inputDataLength << "\n";
+  std::cout << "First , is: " << findFirstOccurenceOfChar(inStr , ',' , inputDataLength) << "\n";
   drawBar();
-
-  std::cout << inStr;
   
   std::string* hypo = newHypothesis(TUPEL_LEN);
 
