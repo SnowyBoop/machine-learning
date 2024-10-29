@@ -7,8 +7,15 @@
 #define TUPEL_LEN 5
 #define DATASET_SIZE 14
 
+//global Variables
+std::vector<std::vector<std::string>> globalDataset;
+
+struct chunkedString{
+  std::string grabPart;
+  std::string rest;
+};
+
 //helper functions
-std::vector<std::string> globalDataset;
 
 char* splitByIndex(char* inputString, int index) {
 
@@ -24,6 +31,19 @@ char* splitByIndex(char* inputString, int index) {
     
 }
 
+std::string readFileToString(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("Could not open file: " + filename);
+    }
+
+    std::stringstream buffer;
+    buffer << file.rdbuf();
+    return buffer.str();
+}
+
+void drawBar() {std::cout << "------\n"; return;}
+
 int findFirstOccurenceOfChar(char* inputArray, char toCheck, int length) {
 
   for(int i = 0; i<length; i++) {
@@ -37,36 +57,31 @@ int findFirstOccurenceOfChar(char* inputArray, char toCheck, int length) {
   
 }
 
-
-void drawBar() {std::cout << "------\n"; return;
-}
-
-
 std::string* newHypothesis(int length) {
 
-  std::string* hypo = new std::string[length]
-;
+  std::string* hypo = new std::string[length];
   for(int i = 0; i < length; i++) {
-
     //hypo[i] = "test" + std::to_string(i) + "\n";
     hypo[i] = "?";
-    
+  }  return hypo;
+}
+
+// machine learning part
+
+std::vector<std::vector<std::string>>* deserializeData(char* datasetInput, int length) {
+
+  std::vector<std::vector<std::string>>* outputDataset = new std::vector<std::vector<std::string>>;
+  
+  while(findFirstOccurenceOfChar(datasetInput,'\n',length) != 0) {
+
+    std::cout << "hi";
+
   }
 
-  return hypo;
+  return outputDataset;
 
 }
 
-std::string readFileToString(const std::string& filename) {
-    std::ifstream file(filename);
-    if (!file.is_open()) {
-        throw std::runtime_error("Could not open file: " + filename);
-    }
-
-    std::stringstream buffer;
-    buffer << file.rdbuf();
-    return buffer.str();
-}
 
 int main() {
 
